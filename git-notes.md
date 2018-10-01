@@ -1,2 +1,2 @@
 # Course Notes
-this is the course for learning about pipes and stuff.
+Ask about line breaks. Soft wrapping vs hard breaking lines in comments and scripts.

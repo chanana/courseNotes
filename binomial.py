@@ -10,16 +10,27 @@ import sys
 
 # if no arguments provided, exit
 if not len(sys.argv) > 1:
-    print('No arguments detected!\nPlease use  -n <number> or --help for more details')
+    print('No arguments detected!\nPlease use \
+            -n <number> or --help for more details')
     sys.exit()
 
+# instantiate Class ArgumentParser()
 parser = argparse.ArgumentParser()
-parser.add_argument('-n', type=int, help='choose from n things')
-parser.add_argument('-k', type=int, help='choose in k ways', default=0)
-parser.add_argument("-l", "--log", action="store_true", help="return the natural logarithm")
-parser.add_argument("--test", action="store_true", help="tests the module")
+parser.add_argument('-n',
+                    #required=True,
+                    type=int,
+                    help='total number of items to choose from')
+parser.add_argument('-k',
+                    type=int,
+                    help='number of items to choose',
+                    default=0)
+parser.add_argument("-l", "--log", 
+                    action="store_true", 
+                    help="returns the log binomial coefficient")
+parser.add_argument("--test",
+                    action="store_true",
+                    help="tests the module and quits")
 args = parser.parse_args()
-print(args)
 
 def logfactorial(n, k=0):
     '''Calculates log(n!/k!)
@@ -63,6 +74,7 @@ def logfactorial(n, k=0):
 
     return total
 
+
 def choose(n, k, log=False):
     '''Calculates log(choose(n, k)) for any integers
     n > 0 and 0 <= k <= n
@@ -86,7 +98,8 @@ def choose(n, k, log=False):
         return logChoose
     else:
         return round(math.exp(logChoose)) # returns whole number
-    
+
+
 if __name__=='__main__':
     if args.test:
         print("testing the module...")
@@ -95,4 +108,4 @@ if __name__=='__main__':
         print("done with tests.")
     else:
         answer = choose(args.n, args.k, log=args.log)
-        print(long(answer))
+        print(answer)
